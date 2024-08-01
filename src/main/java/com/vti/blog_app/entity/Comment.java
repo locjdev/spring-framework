@@ -15,7 +15,19 @@ import java.time.LocalDateTime;
 public class Comment {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // có thêm 1 bảng trung gian để tăng id
+    @SequenceGenerator(
+            name = "comment_id_generator",
+            sequenceName = "comment_sequence",
+            initialValue = 99,
+            // giá trị tăng trong bảng trung gian
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "comment_id_generator"
+    )
     private Long id;
 
     @Column(name = "name", length = 50, nullable = false)
