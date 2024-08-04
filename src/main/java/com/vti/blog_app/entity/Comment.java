@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,20 +16,9 @@ import java.time.LocalDateTime;
 public class Comment {
     @Id
     @Column(name = "id")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // có thêm 1 bảng trung gian để tăng id
-    @SequenceGenerator(
-            name = "comment_id_generator",
-            sequenceName = "comment_sequence",
-            initialValue = 99,
-            // giá trị tăng trong bảng trung gian
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "comment_id_generator"
-    )
-    private Long id;
+    // Mặc định là Auto rồi
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;

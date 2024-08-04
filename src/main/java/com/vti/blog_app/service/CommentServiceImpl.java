@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
@@ -29,7 +31,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDto findById(Long id) {
+    public CommentDto findById(UUID id) {
         return commentRepository.findById(id).map(CommentMapper::map).orElse(null);
 
     }
@@ -48,7 +50,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDto update(Long id, CommentUpdateFrom form) {
+    public CommentDto update(UUID id, CommentUpdateFrom form) {
         var optional = commentRepository.findById(id);
         if (optional.isEmpty()) {
             return null;
@@ -60,7 +62,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         commentRepository.deleteById(id);
     }
 
