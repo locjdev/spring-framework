@@ -14,13 +14,13 @@ public interface CommentService {
 
     Page<CommentDto> findByPostId(Long postId, Pageable pageable);
 
-    CommentDto findById(UUID id);
+    CommentDto findById(String id);
 
     CommentDto create(Long postId, CommentCreateFrom form);
 
-    CommentDto update(UUID id, CommentUpdateFrom form);
+    CommentDto update(String id, CommentUpdateFrom form);
 
-    void deleteById(UUID id);
+    void deleteById(String id);
 
     void deleteByEmail(String email);
 }

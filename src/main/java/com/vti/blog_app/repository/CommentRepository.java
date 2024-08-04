@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.UUID;
 
-public interface CommentRepository extends JpaRepository<Comment, UUID> {
+public interface CommentRepository extends JpaRepository<Comment, String> {
     // 1. Method name
     // Tiền tố: findBy, existsBy, countBy, deleteBy
     // VD1: lấy ra tất cả comment theo name
