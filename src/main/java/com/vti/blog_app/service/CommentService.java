@@ -1,6 +1,7 @@
 package com.vti.blog_app.service;
 
 import com.vti.blog_app.dto.CommentDto;
+import com.vti.blog_app.entity.Comment;
 import com.vti.blog_app.form.CommentCreateFrom;
 import com.vti.blog_app.form.CommentUpdateFrom;
 import org.springframework.data.domain.Page;
@@ -14,13 +15,13 @@ public interface CommentService {
 
     Page<CommentDto> findByPostId(Long postId, Pageable pageable);
 
-    CommentDto findById(String id);
+    CommentDto findById(Comment.PrimaryKey id);
 
     CommentDto create(Long postId, CommentCreateFrom form);
 
-    CommentDto update(String id, CommentUpdateFrom form);
+    CommentDto update(Comment.PrimaryKey id, CommentUpdateFrom form);
 
-    void deleteById(String id);
+    void deleteById(Comment.PrimaryKey id);
 
     void deleteByEmail(String email);
 }

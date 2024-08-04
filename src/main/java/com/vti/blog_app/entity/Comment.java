@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -16,21 +17,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "comment")
 public class Comment {
-    @Id
-    @Column(name = "id")
-    @GenericGenerator(
-            name = "comment_id_generator",
-            type = CommentIdGenerator.class
-    )
-    // Mặc định là Auto rồi
-    @GeneratedValue(generator = "comment_id_generator")
-    private String id;
-
-    @Column(name = "name", length = 50, nullable = false)
-    private String name;
-
-    @Column(name = "email", length = 75, nullable = false)
-    private String email;
+    @EmbeddedId
+    private PrimaryKey pk;
 
     @Column(name = "body", length = 100, nullable = false)
     private String body;
@@ -47,4 +35,16 @@ public class Comment {
     // Cột làm khóa ngoại
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
+
+    // Nhúng
+    @Getter
+    @Setter
+    @Embeddable
+    public static class PrimaryKey implements Serializable {
+        @Column(name = "name", length = 50, nullable = false)
+        private String name;
+
+        @Column(name = "email", length = 75, nullable = false)
+        private String email;
+    }
 }
