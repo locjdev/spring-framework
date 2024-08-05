@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,8 +36,11 @@ public class Comment {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    // Cột làm khóa ngoại
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
-    private Post post;
+    @ManyToMany
+    @JoinTable(
+            name = "post_comment",
+            joinColumns =  @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id")
+    )
+    private List<Post> posts;
 }

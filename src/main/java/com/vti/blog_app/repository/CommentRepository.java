@@ -22,7 +22,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     // VD3: Lấy ra tất cả comment theo name hoặc email
     List<Comment> findByNameOrEmail(String name, String email);
     // VD: Lấy ra tất cả comment theo post id
-    Page<Comment> findByPostId(Long postId, Pageable pageable);
+//    Page<Comment> findByPostId(Long postId, Pageable pageable);
 
     // 2.@Query có 3 cách
     @Query("DELETE FROM Comment WHERE email= :email")
