@@ -35,7 +35,7 @@ public class Comment {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne
+    @ManyToOne
     // Cột làm khóa ngoại
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
