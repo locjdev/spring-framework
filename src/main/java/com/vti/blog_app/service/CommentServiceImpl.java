@@ -2,10 +2,12 @@ package com.vti.blog_app.service;
 
 import com.vti.blog_app.dto.CommentDto;
 import com.vti.blog_app.form.CommentCreateFrom;
+import com.vti.blog_app.form.CommentFilterForm;
 import com.vti.blog_app.form.CommentUpdateFrom;
 import com.vti.blog_app.mapper.CommentMapper;
 import com.vti.blog_app.repository.CommentRepository;
 import com.vti.blog_app.repository.PostRepository;
+import com.vti.blog_app.specification.CommentSpecifiation;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,8 +21,9 @@ public class CommentServiceImpl implements CommentService {
     private PostRepository postRepository;
 
     @Override
-    public Page<CommentDto> findAll(Pageable pageable) {
-        return commentRepository.findAll(pageable).map(CommentMapper::map);
+    public Page<CommentDto> findAll(CommentFilterForm form, Pageable pageable) {
+        var spec = CommentSpecifiation.buildSpec(form);
+        return commentRepository.findAll(spec, pageable).map(CommentMapper::map);
     }
 
     @Override
